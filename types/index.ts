@@ -3,3 +3,9 @@ export interface ICategoria {
     nombre : string;
     icono  : string;
 }
+export interface IChildren {
+    children : JSX.Element | JSX.Element[]
+}
+export interface InterfaceUseQuiosco {
+    categorias : ICategoria[]
+}
