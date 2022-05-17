@@ -4,7 +4,8 @@ import Modal from 'react-modal';
 import useQuiosco from '../hooks/useQuiosco';
 import type { InterfaceUseQuiosco } from '../types/index';
 import ModalProducto from "../components/ModalProducto";
-
+import {ToastContainer} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 interface LayoutParams {
     children : JSX.Element | JSX.Element[];
     pagina   : string;
@@ -46,6 +47,7 @@ export default function Layout({children,pagina}:LayoutParams) {
                     <ModalProducto />
                 </Modal>
             )}
+            <ToastContainer />
         </>
     )
 }
