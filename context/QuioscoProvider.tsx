@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import type { IChildren,ICategoria,IProducto } from '../types/index';
+import type { IChildren,ICategoria,IProducto,IProductoPedido } from '../types/index';
 import axios from 'axios';
 
 const QuioscoContext = createContext<any>({});
@@ -9,6 +9,7 @@ const QuioscoProvider = ({children}:IChildren) => {
     const [categoriaActual, setCategoriaActual] = useState<ICategoria[]>([]);
     const [producto, setProducto] = useState<IProducto[]>([]);
     const [isModalActive, setIsModalActive] = useState<boolean>(false);
+    const [pedido, setPedido] = useState<IProductoPedido[]>([])
 
     const obtenerCategorias = async () => {
         const {data}:{data : ICategoria[]} = await axios('/api/categorias');
@@ -35,6 +36,15 @@ const QuioscoProvider = ({children}:IChildren) => {
     const handleChangeModal = () => {
         setIsModalActive(!isModalActive);
     }
+    const handleAgregarPedido = (producto:IProductoPedido) => {
+        if(pedido.some(productoState => productoState.id === producto.id)){
+            const pedidoActualizado = pedido.map(productoState => productoState.id === producto.id ? producto : productoState);
+            setPedido(pedidoActualizado);
+            return setIsModalActive(false);
+        }
+        setPedido([...pedido,producto]);
+        setIsModalActive(false);
+    }
     return (
         <QuioscoContext.Provider value={{
             categorias,
@@ -43,7 +53,9 @@ const QuioscoProvider = ({children}:IChildren) => {
             handleSetProducto,
             producto,
             isModalActive,
-            handleChangeModal
+            handleChangeModal,
+            handleAgregarPedido,
+            pedido
         }}>
             {children}
         </QuioscoContext.Provider>

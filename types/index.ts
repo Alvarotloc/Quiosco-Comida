@@ -22,4 +22,15 @@ export interface InterfaceUseQuiosco {
     handleSetProducto    : (producto:IProducto) => void;
     isModalActive        : boolean;
     handleChangeModal    : () => void
+    handleAgregarPedido  : (producto:IProductoPedido) => void
+    pedido               : IProductoPedido[]
+}
+
+export interface IProductoPedido {
+    id          : number;
+    nombre      : string;
+    precio      : number;
+    imagen      : string;
+    categoriaId : number;
+    cantidad    : number;
 }
