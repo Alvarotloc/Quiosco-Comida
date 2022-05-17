@@ -7,5 +7,7 @@ export interface IChildren {
     children : JSX.Element | JSX.Element[]
 }
 export interface InterfaceUseQuiosco {
-    categorias : ICategoria[]
+    categorias : ICategoria[];
+    categoriaActual : ICategoria[];
+    handleClickCategoria : (id:number) => void;
 }

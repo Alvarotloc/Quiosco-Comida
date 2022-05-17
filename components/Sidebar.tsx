@@ -1,6 +1,6 @@
 import Image from "next/image";
 import useQuiosco from "../hooks/useQuiosco";
-import type { ICategoria,InterfaceUseQuiosco } from '../types/index';
+import type { InterfaceUseQuiosco } from '../types/index';
 import Categoria from "./Categoria";
 
 const Sidebar = (): JSX.Element => {
