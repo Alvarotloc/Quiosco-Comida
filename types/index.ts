@@ -21,9 +21,9 @@ export interface InterfaceUseQuiosco {
     producto             : IProducto[];
     handleSetProducto    : (producto:IProducto) => void;
     isModalActive        : boolean;
-    handleChangeModal    : () => void
-    handleAgregarPedido  : (producto:IProductoPedido) => void
-    pedido               : IProductoPedido[]
+    handleChangeModal    : () => void;
+    handleAgregarPedido  : (producto:IProductoPedido) => void;
+    pedido               : IProductoPedido[];
 }
 
 export interface IProductoPedido {

@@ -10,7 +10,7 @@ const QuioscoProvider = ({children}:IChildren) => {
     const [categoriaActual, setCategoriaActual] = useState<ICategoria[]>([]);
     const [producto, setProducto] = useState<IProducto[]>([]);
     const [isModalActive, setIsModalActive] = useState<boolean>(false);
-    const [pedido, setPedido] = useState<IProductoPedido[]>([])
+    const [pedido, setPedido] = useState<IProductoPedido[]>([]);
 
     const obtenerCategorias = async () => {
         const {data}:{data : ICategoria[]} = await axios('/api/categorias');
