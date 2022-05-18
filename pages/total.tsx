@@ -8,7 +8,7 @@ export default function Total() {
   const { pedido,setNombre,nombre,ordenarPedido,total }: InterfaceUseQuiosco = useQuiosco();
 
   const comprobarPedido = useCallback(
-    (): boolean => pedido.length === 0 || nombre.trim() === '' || nombre.trim().length > 3,
+    (): boolean => pedido.length === 0 || nombre.trim() === '' || nombre.trim().length < 3,
     [pedido]
   );
 
