@@ -1,3 +1,4 @@
+import type { FormEvent } from 'react';
 export interface ICategoria {
     id        : number;
     nombre    : string;
@@ -27,4 +28,8 @@ export interface InterfaceUseQuiosco {
     pedido                 : IProducto[];
     handleEditarCantidad   : (producto:IProducto) => void;
     handleEliminarProducto : (id:number) => void;
+    nombre                 : string;
+    setNombre              : Function;
+    ordenarPedido          : (evento:FormEvent) => void;
+    total                  : number
 }

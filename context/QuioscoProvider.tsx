@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, FormEvent, useEffect, useState } from "react";
 import type { IChildren,ICategoria,IProducto } from '../types/index';
 import axios from 'axios';
 import { toast } from "react-toastify";
@@ -12,6 +12,8 @@ const QuioscoProvider = ({children}:IChildren) => {
     const [producto, setProducto] = useState<IProducto[]>([]);
     const [isModalActive, setIsModalActive] = useState<boolean>(false);
     const [pedido, setPedido] = useState<IProducto[]>([]);
+    const [nombre, setNombre] = useState<string>('');
+    const [total, setTotal] = useState<number>(0);
 
     const router = useRouter();
 
@@ -25,7 +27,12 @@ const QuioscoProvider = ({children}:IChildren) => {
 
     useEffect(() => {
         setCategoriaActual([categorias[0]])
-    },[categorias])
+    },[categorias]);
+
+    useEffect(() => {
+        const nuevoTotal = pedido.reduce((total,producto) => (producto.precio * producto.cantidad!) + total,0);
+        setTotal(nuevoTotal);
+    },[pedido])
 
     const handleClickCategoria = (id:number) => {
         const categoria = categorias.filter(categoriaFiltrar => categoriaFiltrar.id === id);
@@ -62,6 +69,10 @@ const QuioscoProvider = ({children}:IChildren) => {
         setPedido(pedidoActualizado);
         toast.warning('Producto Eliminado');
     }
+
+    const ordenarPedido = async (evento: FormEvent) => {
+        evento.preventDefault();
+      };
     return (
         <QuioscoContext.Provider value={{
             categorias,
@@ -74,7 +85,11 @@ const QuioscoProvider = ({children}:IChildren) => {
             handleAgregarPedido,
             pedido,
             handleEditarCantidad,
-            handleEliminarProducto
+            handleEliminarProducto,
+            nombre,
+            setNombre,
+            ordenarPedido,
+            total
         }}>
             {children}
         </QuioscoContext.Provider>
